@@ -1,0 +1,18 @@
+<?php
+$pageName = strtolower($_GET['wiki']);
+$fieldTagName = 'keywords';
+
+print('<ul>');
+foreach ($fiches as $name => $fiche) {
+    if (array_key_exists($fieldTagName, $fiche)
+        and ($fiche[$fieldTagName] !== "")
+    ) {
+        $concernedPages = explode(',', $fiche[$fieldTagName]);
+        if (in_array($pageName, $concernedPages)) {
+            $link = '.' . $fiche['url'];
+            $text = $fiche['bf_titre'];
+            print("<li><a href='$link'>$text</a></li>");
+        }
+    }
+}
+print('</ul>');
